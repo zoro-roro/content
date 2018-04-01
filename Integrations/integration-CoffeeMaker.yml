@@ -1,0 +1,44 @@
+commonfields:
+  id: Coffee Maker
+  version: -1
+name: Coffee Maker
+display: Coffee Maker
+category: Utilities
+image: data:image/png;base64,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
+description: Make coffee with Demisto playbooks
+configuration:
+- display: Add milk by default?
+  name: Milk?
+  defaultvalue: ""
+  type: 8
+  required: false
+- display: Add sugar by default?
+  name: Sugar?
+  defaultvalue: ""
+  type: 8
+  required: false
+- display: Strength of coffee (Strong, Medium or Mild)
+  name: Strength
+  defaultvalue: Strong
+  type: 0
+  required: false
+script:
+  script: |
+    // The command input arg holds the command sent from the user.
+    switch (command) {
+        // This is the call made when pressing the integration test button.
+        case 'test-module':
+            return 'ok';
+        case 'make-coffee':
+            md = '# Happy April Fools!\n\n'
+            md += 'Demisto has over 160 integrations today, supporting over 1000 commands. Still, we recommend you make your coffee manually, while having Demisto automate all the rest...\n\n';
+            md += 'Regards,\n';
+            md += '  Your friends at Demisto.';
+            return {'ContentsFormat': formats['markdown'], 'Type': entryTypes['note'], 'Contents': md};
+    }
+  type: javascript
+  commands:
+  - name: make-coffee
+    arguments: []
+    description: Make coffee
+  runonce: false
