@@ -29,6 +29,8 @@ def is_ge_version(ver1, ver2):
     for v1, v2 in zip(ver1, ver2):
         if v1 > v2:
             return False
+        elif v2 > v1:
+            return True
 
     # most significant values are equal
     return len(ver1) <= len(ver2)
