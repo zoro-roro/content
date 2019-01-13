@@ -333,5 +333,3 @@ script:
     description: Check if domain has been compromised
   runonce: false
 releaseNotes: "Fixed typo"
-tests:
-  - Pwned test

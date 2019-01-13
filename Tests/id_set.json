@@ -9850,9 +9850,6 @@
                     "pwned-domain", 
                     "email", 
                     "domain"
-                ], 
-                "tests": [
-                    "Pwned test"
                 ]
             }
         }, 
