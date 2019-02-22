@@ -7474,12 +7474,10 @@
                     "as-get-case-event-ids", 
                     "as-update-case", 
                     "as-get-all-query-viewers", 
-                    "as-case-delete", 
-                    "as-get-query-viewer-results", 
-                    "as-fetch-incidents"
+                    "as-case-delete"
                 ], 
                 "tests": [
-                    "ArcSight ESM Test"
+                    "No test"
                 ]
             }
         }, 
