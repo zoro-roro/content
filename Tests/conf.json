@@ -297,14 +297,7 @@
         },
         {
             "playbookID": "HighlightWords_Test"
-        },
-        {
-            "integrations": "Pentera",
-            "playbookID": "Pcysys-Test"
-        },
-        {
-            "integrations": "Pentera",
-            "playbookID": "Pentera Run Scan - Test"
+
         },
         {
             "playbookID": "StringContainsArray_test"
