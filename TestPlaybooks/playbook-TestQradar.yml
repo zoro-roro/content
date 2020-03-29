@@ -1217,7 +1217,7 @@ tasks:
       query:
         simple: reputation:Good
       ref_name:
-        simple: test_playbook_2
+        simple: test_playbook_1
       time_to_live: {}
       timeout_type: {}
     separatecontext: false
@@ -1251,7 +1251,7 @@ tasks:
       - "36"
     scriptarguments:
       ref_name:
-        simple: test_playbook_2
+        simple: test_playbook_1
     separatecontext: false
     view: |-
       {
@@ -1283,7 +1283,7 @@ tasks:
       - "42"
     scriptarguments:
       ref_name:
-        simple: test_playbook_2
+        simple: test_playbook_1
     continueonerror: true
     separatecontext: false
     view: |-
