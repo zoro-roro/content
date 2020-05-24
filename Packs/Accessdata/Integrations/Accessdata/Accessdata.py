@@ -1,7 +1,7 @@
 import demistomock as demisto
 from CommonServerPython import *
 from CommonServerUserPython import *
-
+from ReutModule import *  # noqa: E402
 
 ''' IMPORTS '''
 
