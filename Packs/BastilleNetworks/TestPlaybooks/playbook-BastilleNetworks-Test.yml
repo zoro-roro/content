@@ -193,12 +193,12 @@ tasks:
       - - operator: isNotEmpty
           left:
             value:
-              simple: Bastille.DeviceEvent.first_seen.time_s
+              simple: Bastille.DeviceEvent.first_seen.time
             iscontext: true
       - - operator: isNotEmpty
           left:
             value:
-              simple: Bastille.DeviceEvent.last_seen.time_s
+              simple: Bastille.DeviceEvent.last_seen.time
             iscontext: true
     view: |-
       {
@@ -288,7 +288,7 @@ tasks:
       - - operator: isNotEmpty
           left:
             value:
-              simple: Bastille.ZoneEvent.time_s
+              simple: Bastille.ZoneEvent.time
             iscontext: true
       - - operator: isNotEmpty
           left:
@@ -348,12 +348,12 @@ tasks:
       - - operator: isNotEmpty
           left:
             value:
-              simple: Bastille.ZoneEvent.first_seen.time_s
+              simple: Bastille.ZoneEvent.first_seen.time
             iscontext: true
       - - operator: isNotEmpty
           left:
             value:
-              simple: Bastille.ZoneEvent.last_seen.time_s
+              simple: Bastille.ZoneEvent.last_seen.time
             iscontext: true
     view: |-
       {
