@@ -24,7 +24,7 @@ class Client(BaseClient):
         self._app_id = app_id
         self._api_key = api_key
 
-    def __create_checksum(self, http_method, api_path, headers, request_body):
+    def create_checksum(self, http_method, api_path, headers, request_body):
         """
         This function creates a checksum value with is being decoded as one of the keys in JWT token.
         It contains the request's data that is being performed.
@@ -40,7 +40,7 @@ class Client(BaseClient):
 
     def create_jwt_token(self, http_method, api_path, headers, request_body, iat=time.time(), algorithm='HS256',
                            version='V1', ):
-        checksum = self.__create_checksum(http_method, api_path, headers, request_body)
+        checksum = self.create_checksum(http_method, api_path, headers, request_body)
 
         payload = {'appid': self._app_id,
                    'iat': iat,
