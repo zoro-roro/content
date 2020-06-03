@@ -20,7 +20,7 @@ HTML_PATTERNS = [
     re.compile(r" +")
 ]
 
-# define global parsers sdfsdf
+# define global parsersasd
 html_parser = HTMLParser()
 
 
