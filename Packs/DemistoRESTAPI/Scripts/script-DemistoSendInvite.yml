@@ -32,7 +32,6 @@ script: |-
 
   var response = res[0].Contents.response;
   var md = tableToMarkdown('Demisto invite user', response);
-  var ec = {email: response.email, link: response.url};
 
   return {
       ContentsFormat: formats.json,

@@ -19,7 +19,7 @@ script: |-
       '/': function() { return lh / rh; },
       '%': function() { return lh % rh; },
       '==': function() { return lh == rh; }
-  }
+  };
 
   actionKeys = Object.keys(supportedActions);
 
@@ -55,8 +55,8 @@ script: |-
       return {ContentsFormat: formats.markdown, Type: entryTypes.error, Contents: '**[' + rh + ']** is not a number'};
   }
 
-  lh = parseInt(lh, lRadix)
-  rh = parseInt(rh, rRadix)
+  lh = parseInt(lh, lRadix);
+  rh = parseInt(rh, rRadix);
 
   //do action on params
   var res = supportedActions[action]();

@@ -73,7 +73,7 @@ script: |-
 
 
           default:
-              throw 'Unsupported date format: '+args.dateFormat
+              throw 'Unsupported date format: '+args.dateFormat;
       }
   }
 

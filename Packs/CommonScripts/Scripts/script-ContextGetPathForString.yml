@@ -12,7 +12,7 @@ script: |+
       keysArr = Object.keys(flat);
       for (i = 0; i < keysArr.length; i++) {
           if (flat[keysArr[i]] === str) {
-              return keysArr[i]
+              return keysArr[i];
           }
       }
       return null;

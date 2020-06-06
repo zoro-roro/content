@@ -14,7 +14,7 @@ script: |-
   var entitlement;
   var retries = parseInt(args.retries) || 10;
   for (i = 0 ; i < retries; i++) {
-      res = executeCommand('addEntitlement', {'persistent': args.persistent, 'replyEntriesTag': args.replyEntriesTag})
+      res = executeCommand('addEntitlement', {'persistent': args.persistent, 'replyEntriesTag': args.replyEntriesTag});
       if (isError(res[0])) {
           if (res[0].Contents.contains('[investigations] [investigation] (15)')) {
               wait(1);

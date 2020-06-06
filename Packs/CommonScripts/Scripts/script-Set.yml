@@ -8,9 +8,9 @@ script: |-
   try {
       if (args.stringify === 'true') {
           if (typeof args.value === 'string') {
-              value = args.value
+              value = args.value;
           } else {
-              value = JSON.stringify(args.value)
+              value = JSON.stringify(args.value);
           }
       } else {
           value = JSON.parse(args.value);

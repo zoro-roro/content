@@ -44,27 +44,27 @@ script: |-
         }
         // Not Proofpoint so just un-escape
         if (v === 0) {
-            var url = input.replace(/\[\.\]/g, '.')
+            var url = input.replace(/\[\.\]/g, '.');
             if (input.startsWith('https') || input.startsWith('hxxps')) {
                 //Normalize: 1) [.] --> . 2) hxxps --> https 3) &amp --> & 4) https:\\ --> https://
-                url = url.replace(/hxxps/i, 'https').replace(/&amp;/g, '&').replace(/https:\\\\/g, 'https://').replace(/https:\\/g, 'https://')
+                url = url.replace(/hxxps/i, 'https').replace(/&amp;/g, '&').replace(/https:\\\\/g, 'https://').replace(/https:\\/g, 'https://');
                 // Normalize the URL with https prefix
                 if (url.startsWith('https:/') && !url.startsWith('https://')) {
-                    url = url.replace('https:/', 'https://')
+                    url = url.replace('https:/', 'https://');
                 }
                 if (url.search(/https:/i) === 0 && url.search(/https:\/\//i) !== 0) {
-                    url = url.replace(/https:/i, 'https://')
+                    url = url.replace(/https:/i, 'https://');
                 }
             }
             else if (input.startsWith('http') || input.startsWith('hxxp')) {
                 //Normalize: 1) [.] --> . 2) hxxp --> http 3) &amp --> & 4) http:\\ --> http://
-                url = url.replace(/hxxp/i, 'http').replace(/&amp;/g, '&').replace(/http:\\\\/g, 'http://').replace(/http:\\/g, 'http://')
+                url = url.replace(/hxxp/i, 'http').replace(/&amp;/g, '&').replace(/http:\\\\/g, 'http://').replace(/http:\\/g, 'http://');
                 // Normalize the URL with http prefix
                 if (url.startsWith('http:/') && !url.startsWith('http://')) {
-                    url = url.replace('http:/', 'http://')
+                    url = url.replace('http:/', 'http://');
                 }
                 if (url.search(/http:/i) === 0 && url.search(/http:\/\//i) !== 0) {
-                    url = url.replace(/http:/i, 'http://')
+                    url = url.replace(/http:/i, 'http://');
                 }
             }
             if (url.search(/http/i) !== 0 && url.search(/ftp/i) !== 0) {
@@ -73,8 +73,9 @@ script: |-
             return url;
         }
         // If proofpoint type v3
+        var clean;
         if (v === 3) {
-            var clean = input.substr(PROOFPOINT_PREFIXES[v - 1].length);
+            clean = input.substr(PROOFPOINT_PREFIXES[v - 1].length);
             var closeIndex = clean.indexOf('__');
             clean = clean.substr(0, closeIndex);
             var url_reg = /((http)s?:)(\/{1,2})(.*)/g;
@@ -88,7 +89,7 @@ script: |-
         var ampersand_reg = /%26/g;
         var hash_reg = /%23/g;
         var equals_reg = /%3D/g;
-        var clean = input.substr(PROOFPOINT_PREFIXES[v - 1].length).replace(/-/g, '%').replace(/_/g, '/').replace('%3A//', '://').replace(re, '').replace('%3F', '?').replace('%3D', '=').replace(at_sign_reg, '@').replace(ampersand_reg, '&').replace(hash_reg, '#').replace(equals_reg, '=');
+        clean = input.substr(PROOFPOINT_PREFIXES[v - 1].length).replace(/-/g, '%').replace(/_/g, '/').replace('%3A//', '://').replace(re, '').replace('%3F', '?').replace('%3D', '=').replace(at_sign_reg, '@').replace(ampersand_reg, '&').replace(hash_reg, '#').replace(equals_reg, '=');
         try {
             clean = decodeURI(clean);
         } catch (e) {

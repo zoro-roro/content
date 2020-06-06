@@ -27,13 +27,13 @@ script: |-
       }
   }
   if (vals.length == 1) {
-    setContext('MatchRegex.results', vals[0])
+    setContext('MatchRegex.results', vals[0]);
     return {Type: entryTypes.note, Contents: vals[0], ContentsFormat: formats.text, EntryContext: ec};
   } else if (vals.length) {
-    setContext('MatchRegex.results', vals)
+    setContext('MatchRegex.results', vals);
     return {Type: entryTypes.note, Contents: vals, ContentsFormat: formats.text, EntryContext: ec};
   } else {
-    setContext('MatchRegex.results', vals)
+    setContext('MatchRegex.results', vals);
     return {Type: entryTypes.note, Contents: 'Regex does not match', ContentsFormat: formats.text};
   }
 type: javascript

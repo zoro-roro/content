@@ -29,7 +29,7 @@ script: |
   var onCallArg = true ? args.onCall === 'true' : false;
 
   function pickRandomUser(usersRes) {
-      var usersList = usersRes[0].Contents.map(function (u) { return u.username });
+      var usersList = usersRes[0].Contents.map(function (u) { return u.username; });
       userToAssign = usersList[Math.floor(Math.random() * usersList.length)];
   }
 

@@ -20,7 +20,7 @@ script: |+
       if (typeof getField !== 'string') {
           logInfo('WhereFieldEquals - got invalid getField [' + getField + ']. Ignoring');
       } else {
-           res = res.map(function(item) { return item[getField]});
+           res = res.map(function(item) { return item[getField]; });
       }
   }
 

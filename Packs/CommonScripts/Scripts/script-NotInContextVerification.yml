@@ -3,7 +3,6 @@ commonfields:
   version: -1
 name: NotInContextVerification
 script: |+
-  var val = invContext.keyToWatch;
   var argumentsVal = args.cmdArguments;
   var argsArr = argumentsVal.split(",");
 

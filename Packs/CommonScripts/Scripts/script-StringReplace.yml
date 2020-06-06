@@ -8,7 +8,7 @@ script: |-
           Type: entryTypes.error,
           ContentsFormat: formats.text,
           Contents: 'Invalid input - please make sure \'data\' is of type string'
-      }
+      };
   }
 
   var arr = [];

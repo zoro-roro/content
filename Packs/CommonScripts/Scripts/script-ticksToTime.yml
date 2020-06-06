@@ -12,7 +12,7 @@ script: |
       var seconds = "0" + obj.Seconds;
       var strTime = obj.Year+'-'+month.substr(-2)+'-'+day.substr(-2) + ' '+hours.substr(-2) +':'+ minutes.substr(-2) +':'+ seconds.substr(-2);
       return strTime;
-  }
+  };
 
   //ticks are in nanotime; convert to millis
   var ticksToMillis = args.ticks / 10000;
@@ -43,7 +43,7 @@ script: |
   obj.UTC.Display = getDateString(obj.UTC);
   obj.Local.Display = getDateString(obj.Local);
 
-  return({'HumanReadable': obj.Local.Display,'ContentsFormat': formats.json, 'Type': entryTypes['note'], 'Contents': obj});
+  return({'HumanReadable': obj.Local.Display,'ContentsFormat': formats.json, 'Type': entryTypes.note, 'Contents': obj});
 type: javascript
 tags:
 - Utility

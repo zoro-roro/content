@@ -4,7 +4,6 @@ commonfields:
 name: findIncidentsWithIndicator
 script: |-
   var res = executeCommand("getIncidents", {"query": 'indicator.value:"'+args.indicator+'"'});
-  var incidentsIDs=[];
   var foundIncidents = [];
   var currIncidentID = incidents[0].id;
   var ec = {};
@@ -28,7 +27,7 @@ script: |-
       ec = {"IncidentsWithIndicator":{"Indicator": args.indicator,"incidentIDs":[]}};
 
       md += "Found " + foundIncidents.length + " incidents:\n";
-      md += "ID|Name|Severity|Owner|Status\n-|-|-|-|-\n"
+      md += "ID|Name|Severity|Owner|Status\n-|-|-|-|-\n";
 
       foundIncidents.forEach(function (incident) {
           md += "[#"+incident.id+"](/#/WarRoom/"+incident.id+")|" + incident.name + "|" + dict.severity[incident.severity] + "|" +incident.owner+"|"+
@@ -36,7 +35,7 @@ script: |-
           ec.IncidentsWithIndicator.incidentIDs.push(incident.id);
       });
   } else {
-      md += "No incidents found"
+      md += "No incidents found";
   }
   return {Type: entryTypes.note, Contents: foundIncidents, ContentsFormat: formats.json, HumanReadable: md, EntryContext: ec};
 type: javascript

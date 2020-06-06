@@ -51,7 +51,7 @@ script: |-
   }
 
   // Unite into one array
-  maliciousIndicators = []
+  maliciousIndicators = [];
   maliciousIndicators = maliciousIndicators.concat(filesIndicators);
   maliciousIndicators = maliciousIndicators.concat(hashesIndicators);
   maliciousIndicators = maliciousIndicators.concat(ipsIndicators);
@@ -105,24 +105,24 @@ script: |-
       return 'yes';
 
   if (args.queryIndicators == 'yes') {
-      var query = "(reputation:Bad"
+      var query = "(reputation:Bad";
       if (args.includeSuspicious == 'yes') {
-          query = query + " or reputation:Suspicious"
+          query = query + " or reputation:Suspicious";
       }
-      query = query + ")"
+      query = query + ")";
 
       if ((args.maliciousQueryOverride) && (args.maliciousQueryOverride.length > 0)) {
-          query = args.maliciousQueryOverride
+          query = args.maliciousQueryOverride;
       }
 
-      var indicatorsRes = executeCommand("findIndicators", {"query":query+" and investigationIDs:"+investigation.id,"size":1})
+      var indicatorsRes = executeCommand("findIndicators", {"query":query+" and investigationIDs:"+investigation.id,"size":1});
       if (indicatorsRes && indicatorsRes[0] && indicatorsRes[0].Contents[0]) {
           // we have results, so we found a maliciuos indicator for this investigation
-          return 'yes'
+          return 'yes';
       }
   }
 
-  return 'no'
+  return 'no';
 type: javascript
 tags:
 - Utility

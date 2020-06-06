@@ -14,7 +14,7 @@ script: |
     answer = 'yes';
   }
 
-  setContext('AreValuesEqual', answer)
+  setContext('AreValuesEqual', answer);
   return answer;
 type: javascript
 tags:

@@ -72,8 +72,8 @@ script: |-
 
       // create file content
       var fileContent = headers.join() + '\r';
-      for (var i = 0; i < rows.length;  i++) {
-          var line = rows[i].join();
+      for (var k = 0; k < rows.length;  k++) {
+          var line = rows[k].join();
           fileContent += '\n' + line ;
       }
       return fileContent;
@@ -82,7 +82,7 @@ script: |-
   // string was passed as input
   if (typeof args.csvArray === 'string') {
       // add array brackets if missing from string
-      args.csvArray = args.csvArray[0] == '[' ? args.csvArray : '[' + args.csvArray + ']'
+      args.csvArray = args.csvArray[0] == '[' ? args.csvArray : '[' + args.csvArray + ']';
       // try to parse string to json
       try {
           args.csvArray = JSON.parse(args.csvArray);

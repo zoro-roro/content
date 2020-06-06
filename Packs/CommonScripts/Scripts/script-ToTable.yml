@@ -6,7 +6,7 @@ script: |-
   var data = args.data;
   var headers = args.columns ? args.columns.split(',') : null;
   if(!Array.isArray(data)) {
-      data = [data]
+      data = [data];
   }
   var flatData = [];
   data.forEach(function(element) {

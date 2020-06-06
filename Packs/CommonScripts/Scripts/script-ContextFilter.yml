@@ -21,21 +21,21 @@ script: |
       case 'upper':
           ec[args.out] = args.data.toUpperCase();
           md = 'Converted data to upper case and stored in ' + args.out;
-          break
+          break;
       case 'lower':
           ec[args.out] = args.data.toLowerCase();
           md = 'Converted data to lower case and stored in ' + args.out;
-          break
+          break;
       case 'join':
           var join = (args.filter) ? args.filter : ',';
           ec[args.out] = args.data.join(join);
           md = 'Joined data to ' + args.out;
-          break
+          break;
       case 'split':
           var split = (args.filter) ? args.filter : ',';
           ec[args.out] = args.data.split(split);
           md = 'Split data to ' + args.out;
-          break
+          break;
       case 'index':
           var index = (args.filter) ? args.filter : '0';
           var i = parseInt(index);
@@ -47,7 +47,7 @@ script: |
           }
           ec[args.out] = args.data[i];
           md = 'Returned element ' + index + ' from data to ' + args.out;
-          break
+          break;
       case 'substr':
           var sub = (args.filter) ? args.filter : '0';
           var from = parseInt(sub);
@@ -63,11 +63,11 @@ script: |
           }
           ec[args.out] = args.data.substr(from, len);
           md = 'Returned substr from data to ' + args.out;
-          break
+          break;
       case 'trim':
           ec[args.out] = args.data.substr(from, len);
           md = 'Trimmed data to ' + args.out;
-          break
+          break;
       case 'regex':
           if (!args.filter) {
               return {ContentsFormat: formats.text, Type: entryTypes.error, Contents: 'Regex not provided to filter'};
@@ -82,7 +82,7 @@ script: |
               ec[args.out] = res[0];
               md = 'Returned regex match from data to ' + args.out;
           }
-          break
+          break;
       case 'replace':
           if (!args.filter) {
               return {ContentsFormat: formats.text, Type: entryTypes.error, Contents: 'Regex not provided to filter'};
@@ -91,7 +91,7 @@ script: |
           var r = new RegExp(args.filter, 'i');
           ec[args.out] = args.data.replace(r, replace);
           md = 'Replaced match from data to ' + args.out;
-          break
+          break;
   }
   if (md !== '') {
       return {Type: entryTypes.note, Contents: ec, ContentsFormat: formats.json, HumanReadable: md, EntryContext: ec};

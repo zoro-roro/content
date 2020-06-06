@@ -45,7 +45,6 @@ script: |2-
   });
   var ec = {};
   var suspicious = dq(emailObj,"Distance(val.Value > 0 && val.Value < {0}).Value".format(threshold));
-  var dbotScore = 0;
   var malicious = null;
 
   if(suspicious && suspicious.length > 0){

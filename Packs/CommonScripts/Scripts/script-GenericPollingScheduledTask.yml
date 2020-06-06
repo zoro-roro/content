@@ -47,7 +47,7 @@ script: |-
       if (err === undefined) {
           params.input = 'YES';
       } else {
-          params.input = 'NO'
+          params.input = 'NO';
       }
       if (playbookId) {
           params.parentPlaybookID = playbookId;
