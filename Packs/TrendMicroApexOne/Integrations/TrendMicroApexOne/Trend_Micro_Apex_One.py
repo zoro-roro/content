@@ -90,6 +90,137 @@ class Client(BaseClient):
         res = self._http_request('GET', url, headers=self._headers, params=params)
 
 
+def create_live_investigation_from_registry_command(client, args):
+    agent_guid = args.get('agent_guid')
+    investigation_name = args.get('investigation_name')
+    server_guid = args.get('server_guid')
+    time_range = args.get('time_range')
+    scan_schedule_id = args.get('scan_schedule_id')
+    scan_schedule_guid = args.get('scan_schedule_guid')
+    endpoint_url = args.get('endpoint_url')
+
+    endpoint_name_filter = args.get('endpoint_name_filter')
+    endpoint_type_filter = args.get('endpoint type_filter')  # TODO: create a drop down menu
+    endpoint_ip_address_filter = args.get('endpoint_ip_address_filter')
+    endpoint_operating_system_filter = args.get('endpoint_operating_system_filter')
+    endpoint_user_name_filter = args.get('endpoint_user_name_filter')  # TODO: create a drop down menu
+
+    registry_name = args.get('registry_name')
+    registry_key = args.get('registry_key')
+    match_option = args.get('match_option')
+    registry_value = args.get('registry_value')
+
+
+def create_live_investigation_from_file_command(client, args):
+    agent_guid = args.get('agent_guid')
+    investigation_name = args.get('investigation_name')
+    server_guid = args.get('server_guid')
+    time_range = args.get('time_range')
+    scan_schedule_id = args.get('scan_schedule_id')
+    scan_schedule_guid = args.get('scan_schedule_guid')
+    endpoint_url = args.get('endpoint_url')
+
+    endpoint_name_filter = args.get('endpoint_name_filter')
+    endpoint_type_filter = args.get('endpoint type_filter')  # TODO: create a drop down menu
+    endpoint_ip_address_filter = args.get('endpoint_ip_address_filter')
+    endpoint_operating_system_filter = args.get('endpoint_operating_system_filter')  # TODO: create a drop down menu
+    endpoint_user_name_filter = args.get('endpoint_user_name_filter')
+
+    base64_encoded_content = args.get('base64_encoded_content')
+    criteria_hash_id = args.get('criteria_hash_id')
+    file_name = args.get('file_name')
+
+
+def create_custom_live_investigation_command(client, args):
+    agent_guid = args.get('agent_guid')
+    investigation_name = args.get('investigation_name')
+    server_guid = args.get('server_guid')
+    time_range = args.get('time_range')
+    scan_schedule_id = args.get('scan_schedule_id')
+    scan_schedule_guid = args.get('scan_schedule_guid')
+    endpoint_url = args.get('endpoint_url')
+
+    endpoint_name_filter = args.get('endpoint_name_filter')  # TODO: create a drop down menu
+    endpoint_type_filter = args.get('endpoint type_filter')
+    endpoint_ip_address_filter = args.get('endpoint_ip_address_filter')
+    endpoint_operating_system_filter = args.get('endpoint_operating_system_filter')  # TODO: create a drop down menu
+    endpoint_user_name_filter = args.get('endpoint_user_name_filter')
+
+    operator = args.get('operator')
+    file_name_contains = args.get('file_name_contains')
+    file_name_is = args.get('file_name_is')
+    file_path_contains = args.get('file_path_contains')
+    file_path_is = args.get('file_path_is')
+    file_sha1 = args.get('file_sha1')
+    file_md5 = args.get('file_md5')
+    account_contains = args.get('account_contains')
+    account_is = args.get('account_is')
+    command_line_is = args.get('command_line_is')
+    command_line_contains = args.get('command_line_contains')
+    registry_key_is = args.get('registry_key_is')
+    registry_key_contains = args.get('registry_key_contains')
+    registry_name_contains = args.get('registry_name_contains')
+    registry_name_is = args.get('registry_name_is')
+    registry_data_contains = args.get('registry_data_contains')
+    registry_data_is = args.get('registry_data_is')
+    host_name_is = args.get('host_name_is')
+    host_name_contains = args.get('host_name_contains')
+    file_sha2 = args.get('file_sha2')
+
+
+def create_scheduled_investigation_command(client, args):
+    agent_guid = args.get('agent_guid')
+    investigation_name = args.get('investigation_name')
+    server_guid = args.get('server_guid')
+    time_range = args.get('time_range')
+    user_time_zone = args.get('user_time_zone')
+    scan_type = args.get('scan_type')  # TODO: create a drop down menu
+
+    endpoint_name_filter = args.get('endpoint_name_filter')  # TODO: create a drop down menu
+    endpoint_type_filter = args.get('endpoint type_filter')
+    endpoint_ip_address_filter = args.get('endpoint_ip_address_filter')
+    endpoint_operating_system_filter = args.get('endpoint_operating_system_filter')  # TODO: create a drop down menu
+    endpoint_user_name_filter = args.get('endpoint_user_name_filter')
+
+    # TODO: add in every field description that one of this fields is mandatory
+    end_date = args.get('end_date')
+    repeat_type = args.get('repeat_type')
+    repeat_value = args.get('repeat_value')
+    start_date = args.get('start_date')
+
+    base64_encoded_content = args.get('base64_encoded_content')
+    criteria_hash_id = args.get('criteria_hash_id')
+    file_name = args.get('file_name')
+
+
+def create_historical_investigation_command(client, args):
+    endpoint_url = args.get('endpoint_url')
+    criteria_kvp = args.get('criteria_kvp')
+    criteria_source = args.get('criteria_source')
+    search_period = args.get('search_period')
+
+    operator = args.get('operator')
+    file_name_contains = args.get('file_name_contains')
+    file_name_is = args.get('file_name_is')
+    file_path_contains = args.get('file_path_contains')
+    file_path_is = args.get('file_path_is')
+    file_sha1 = args.get('file_sha1')
+    file_md5 = args.get('file_md5')
+    account_contains = args.get('account_contains')
+    account_is = args.get('account_is')
+    command_line_is = args.get('command_line_is')
+    command_line_contains = args.get('command_line_contains')
+    registry_key_is = args.get('registry_key_is')
+    registry_key_contains = args.get('registry_key_contains')
+    registry_name_contains = args.get('registry_name_contains')
+    registry_name_is = args.get('registry_name_is')
+    registry_data_contains = args.get('registry_data_contains')
+    registry_data_is = args.get('registry_data_is')
+    host_name_is = args.get('host_name_is')
+    host_name_contains = args.get('host_name_contains')
+    file_sha2 = args.get('file_sha2')
+
+
 def list_servers_command(client, args):
     entity_id = args.get('entity_id')
     ip_address = args.get('ip')
@@ -214,6 +345,16 @@ def main():
             return_outputs(*list_servers_command(client, demisto.args()))
         elif demisto.command() == 'trendmicro-apex-security-agents-list':
             return_outputs(*list_security_agents_command(client, demisto.args()))
+        elif demisto.command() == 'trendmicro-apex-create-live-investigation-from-file':
+            return_outputs(*create_live_investigation_from_file_command(client, demisto.args()))
+        elif demisto.command() == 'trendmicro-apex-create-live-investigation-from-registry':
+            return_outputs(*create_live_investigation_from_registry_command(client, demisto.args()))
+        elif demisto.command() == 'trendmicro-apex-create-custom-live-investigation':
+            return_outputs(*create_custom_live_investigation_command(client, demisto.args()))
+        elif demisto.command() == 'trendmicro-apex-create-historical-investigation':
+            return_outputs(*create_historical_investigation_command(client, demisto.args()))
+        elif demisto.command() == 'trendmicro-apex-create-scheduled-investigation':
+            return_outputs(*create_scheduled_investigation_command(client, demisto.args()))
         # elif demisto.command() == 'trendmicro-logs-list':
         #     return_outputs(*list_logs_command(client, demisto.args()))
         # elif demisto.command() == 'trendmicro-apex-udso-add':
