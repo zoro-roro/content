@@ -897,6 +897,7 @@ def extract_matching_object_from_id_set(obj_id, obj_set, server_version='0'):
 def get_test_from_conf(branch_name, conf=None):
     tests = set([])
     changed = set([])
+    integrations_to_upload = set([])
     change_string = tools.run_command("git diff origin/master...{} Tests/conf.json".format(branch_name))
     added_groups = re.findall(r'(\+[ ]+")(.*)(":)', change_string)
     if added_groups:
@@ -913,11 +914,12 @@ def get_test_from_conf(branch_name, conf=None):
             conf = TestConf(json.load(conf_file))
 
     conf_tests = conf.get_tests()
-    for t in conf_tests:
-        playbook_id = t['playbookID']
-        integrations_conf = t.get('integrations', [])
+    for test in conf_tests:
+        playbook_id = test['playbookID']
+        integrations_conf = test.get('integrations', [])
         if playbook_id in changed:
             tests.add(playbook_id)
+            integrations_to_upload.update(integrations_conf)
             continue
 
         if not isinstance(integrations_conf, list):
@@ -926,11 +928,12 @@ def get_test_from_conf(branch_name, conf=None):
         for integration in integrations_conf:
             if integration in changed:
                 tests.add(playbook_id)
+                integrations_to_upload.add(integration)
 
     if not tests:
         tests.add('changed skip section')
 
-    return tests
+    return tests, integrations_to_upload
 
 
 def is_test_runnable(test_id, id_set, conf, server_version):
@@ -1097,8 +1100,7 @@ def get_test_list_and_content_packs_to_install(files_string, branch_name, two_be
     """Create a test list that should run"""
 
     (modified_files_with_relevant_tests, modified_tests_list, changed_common, is_conf_json, sample_tests,
-     is_reputations_json,
-     is_indicator_json) = get_modified_files_for_testing(files_string)
+     is_reputations_json, is_indicator_json) = get_modified_files_for_testing(files_string)
 
     tests = set([])
     packs_to_install = set([])
@@ -1121,8 +1123,9 @@ def get_test_list_and_content_packs_to_install(files_string, branch_name, two_be
         packs_to_install = packs_to_install.union(get_content_pack_name_of_test(tests, id_set))
 
     if is_conf_json:
-        tests = tests.union(get_test_from_conf(branch_name, conf))
-
+        res = get_test_from_conf(branch_name, conf)
+        tests = tests.union(res[0])
+        integrations_to_upload = res[1]
     if not tests:
         rand = random.Random(branch_name)
         tests = get_random_tests(
