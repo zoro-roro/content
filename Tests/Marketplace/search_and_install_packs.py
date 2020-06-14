@@ -79,7 +79,7 @@ def get_pack_dependencies(client, prints_manager, pack_data):
             client,
             path='/contentpacks/marketplace/search/dependencies',
             method='POST',
-            body=[{'id': pack_id}],
+            body=[pack_data],
             accept='application/json',
             _request_timeout=None
         )
@@ -91,17 +91,24 @@ def get_pack_dependencies(client, prints_manager, pack_data):
             create_dependencies_data_structure(reseponse_data, dependants_ids, dependencies_data, dependants_ids)
             dependencies_str = ', '.join([dep['id'] for dep in dependencies_data])
             if dependencies_data:
-                message = 'Found the following dependencies for pack {}:\n{}\n'.format(pack_id, dependencies_str)
+                message = 'Found the following dependencies for pack {} v{}:\n{}\n'.format(pack_id,
+                                                                                           pack_data['version'],
+                                                                                           dependencies_str)
                 prints_manager.add_print_job(message, print_color, 0, LOG_COLORS.GREEN)
                 prints_manager.execute_thread_prints(0)
             return dependencies_data
         else:
             result_object = ast.literal_eval(response_data)
             msg = result_object.get('message', '')
-            err_msg = 'Failed to get pack {} dependencies - with status code {}\n{}\n'.format(pack_id, status_code, msg)
+            err_msg = 'Failed to get pack {} v{} dependencies - with status code {}\n{}\n'.format(pack_id,
+                                                                                                  pack_data['version'],
+                                                                                                  status_code,
+                                                                                                  msg)
             raise Exception(err_msg)
     except Exception as e:
-        err_msg = 'The request to get pack {} dependencies has failed. Reason:\n{}\n'.format(pack_id, str(e))
+        err_msg = 'The request to get pack {} v{} dependencies has failed. Reason:\n{}\n'.format(pack_id,
+                                                                                                 pack_data['version'],
+                                                                                                 str(e))
         raise Exception(err_msg)
 
 
