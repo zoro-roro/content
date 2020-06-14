@@ -79,7 +79,7 @@ def get_pack_dependencies(client, prints_manager, pack_data):
             client,
             path='/contentpacks/marketplace/search/dependencies',
             method='POST',
-            body=[pack_data],
+            body=[{'id': pack_id}],
             accept='application/json',
             _request_timeout=None
         )
