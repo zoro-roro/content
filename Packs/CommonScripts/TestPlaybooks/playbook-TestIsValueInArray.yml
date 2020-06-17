@@ -5,10 +5,10 @@ starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: 268876ff-639e-4006-874a-a79e02cc95bf
+    taskid: 777999b1-696d-4367-8959-cb6278b5e690
     type: start
     task:
-      id: 268876ff-639e-4006-874a-a79e02cc95bf
+      id: 777999b1-696d-4367-8959-cb6278b5e690
       version: -1
       name: ""
       iscommand: false
@@ -31,10 +31,10 @@ tasks:
     quietmode: 0
   "1":
     id: "1"
-    taskid: 7db207a7-ad98-4343-8db3-80b8951302d4
+    taskid: ffb910f1-ecbf-493b-81db-a8084fee93eb
     type: regular
     task:
-      id: 7db207a7-ad98-4343-8db3-80b8951302d4
+      id: ffb910f1-ecbf-493b-81db-a8084fee93eb
       version: -1
       name: Create array in context
       description: Find all users associated with a role
@@ -67,10 +67,10 @@ tasks:
     quietmode: 0
   "2":
     id: "2"
-    taskid: 803761a8-9be3-4bb7-8c0f-d4d305528f6f
+    taskid: e9fa6303-e2b0-4af8-8229-b1b84f2cf7f1
     type: condition
     task:
-      id: 803761a8-9be3-4bb7-8c0f-d4d305528f6f
+      id: e9fa6303-e2b0-4af8-8229-b1b84f2cf7f1
       version: -1
       name: Check existing value
       description: Look for value in a list
@@ -107,10 +107,10 @@ tasks:
     quietmode: 0
   "3":
     id: "3"
-    taskid: 5bfe9ed3-c070-46ff-8faa-1b5feebf7804
+    taskid: 3dfc40fa-249f-4541-8ad0-5d549ffeb021
     type: regular
     task:
-      id: 5bfe9ed3-c070-46ff-8faa-1b5feebf7804
+      id: 3dfc40fa-249f-4541-8ad0-5d549ffeb021
       version: -1
       name: Bad...
       type: regular
@@ -131,10 +131,10 @@ tasks:
     quietmode: 0
   "4":
     id: "4"
-    taskid: cdf4eb33-c8f7-42f3-8c76-523fdb8384a7
+    taskid: d6f5b235-1780-4775-87e9-dd0d67a37ef6
     type: condition
     task:
-      id: cdf4eb33-c8f7-42f3-8c76-523fdb8384a7
+      id: d6f5b235-1780-4775-87e9-dd0d67a37ef6
       version: -1
       name: Check a non exist value
       scriptName: IsValueInArray
@@ -170,10 +170,10 @@ tasks:
     quietmode: 0
   "5":
     id: "5"
-    taskid: c3d3732b-6cc6-4008-84d7-ceafa0bb66ea
+    taskid: 49e92eb9-eea7-45bc-848b-84c6f6408cfc
     type: regular
     task:
-      id: c3d3732b-6cc6-4008-84d7-ceafa0bb66ea
+      id: 49e92eb9-eea7-45bc-848b-84c6f6408cfc
       version: -1
       name: Bad...
       type: regular
@@ -194,10 +194,10 @@ tasks:
     quietmode: 0
   "6":
     id: "6"
-    taskid: ab8aaac0-d242-463f-8be1-9fd800dcdb45
+    taskid: 636b7dfe-543f-4b53-8396-3a9863e14f20
     type: condition
     task:
-      id: ab8aaac0-d242-463f-8be1-9fd800dcdb45
+      id: 636b7dfe-543f-4b53-8396-3a9863e14f20
       version: -1
       name: 'Check two equal strings '
       scriptName: IsValueInArray
@@ -233,10 +233,10 @@ tasks:
     quietmode: 0
   "7":
     id: "7"
-    taskid: 0f19c80d-4cac-4848-83ef-5d2c0a09c8fa
+    taskid: 03ff4c6d-a017-45a7-85ac-58e6fd3a1d0c
     type: regular
     task:
-      id: 0f19c80d-4cac-4848-83ef-5d2c0a09c8fa
+      id: 03ff4c6d-a017-45a7-85ac-58e6fd3a1d0c
       version: -1
       name: Bad...
       type: regular
@@ -257,10 +257,10 @@ tasks:
     quietmode: 0
   "8":
     id: "8"
-    taskid: e770565c-9b81-4fbf-86af-a20be65283a3
+    taskid: 59715a06-d89b-4395-84aa-54f17fbccbff
     type: condition
     task:
-      id: e770565c-9b81-4fbf-86af-a20be65283a3
+      id: 59715a06-d89b-4395-84aa-54f17fbccbff
       version: -1
       name: 'Check two non equal strings '
       scriptName: IsValueInArray
@@ -296,10 +296,10 @@ tasks:
     quietmode: 0
   "9":
     id: "9"
-    taskid: 36adc2a3-a170-4bc5-8f49-797fcbc6c895
+    taskid: 0787c392-ea4a-4e5e-877b-7761772e8b8d
     type: regular
     task:
-      id: 36adc2a3-a170-4bc5-8f49-797fcbc6c895
+      id: 0787c392-ea4a-4e5e-877b-7761772e8b8d
       version: -1
       name: Bad...
       type: regular
@@ -318,40 +318,12 @@ tasks:
     ignoreworker: false
     skipunavailable: false
     quietmode: 0
-  "10":
-    id: "10"
-    taskid: 691e195e-0d5b-46fe-804a-3081e7652437
-    type: regular
-    task:
-      id: 691e195e-0d5b-46fe-804a-3081e7652437
-      version: -1
-      name: Close
-      scriptName: CloseInvestigation
-      type: regular
-      iscommand: false
-      brand: ""
-    scriptarguments:
-      notes: {}
-      reason: {}
-    separatecontext: false
-    view: |-
-      {
-        "position": {
-          "x": 450,
-          "y": 2430
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
   "11":
     id: "11"
-    taskid: f7d82642-3594-4464-83ca-b72dc0c6c804
+    taskid: 91141070-63e6-4c93-875a-1f37c2282b8c
     type: condition
     task:
-      id: f7d82642-3594-4464-83ca-b72dc0c6c804
+      id: 91141070-63e6-4c93-875a-1f37c2282b8c
       version: -1
       name: Check empty array
       scriptName: IsValueInArray
@@ -386,10 +358,10 @@ tasks:
     quietmode: 0
   "12":
     id: "12"
-    taskid: 10326c52-dfe8-4cbb-8f5f-f35857707a3e
+    taskid: 9b754591-1e61-499a-8c5d-ecdbe985ca1b
     type: regular
     task:
-      id: 10326c52-dfe8-4cbb-8f5f-f35857707a3e
+      id: 9b754591-1e61-499a-8c5d-ecdbe985ca1b
       version: -1
       name: Bad...
       type: regular
@@ -410,10 +382,10 @@ tasks:
     quietmode: 0
   "13":
     id: "13"
-    taskid: ab42d7d4-0d3d-4dad-8fd1-448bc0adf9d8
+    taskid: e11bf068-4e20-489f-8d0b-d51e419da6ee
     type: condition
     task:
-      id: ab42d7d4-0d3d-4dad-8fd1-448bc0adf9d8
+      id: e11bf068-4e20-489f-8d0b-d51e419da6ee
       version: -1
       name: Check empty value
       scriptName: IsValueInArray
@@ -421,8 +393,6 @@ tasks:
       iscommand: false
       brand: ""
     nexttasks:
-      "no":
-      - "10"
       "yes":
       - "14"
     scriptarguments:
@@ -448,10 +418,10 @@ tasks:
     quietmode: 0
   "14":
     id: "14"
-    taskid: 9bd5ef1c-e627-4bab-81ba-ea2833c9bc70
+    taskid: db295bfe-c0c3-479e-8092-485ecf2c2860
     type: regular
     task:
-      id: 9bd5ef1c-e627-4bab-81ba-ea2833c9bc70
+      id: db295bfe-c0c3-479e-8092-485ecf2c2860
       version: -1
       name: Bad...
       type: regular
@@ -475,7 +445,7 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 2637,
+        "height": 2432,
         "width": 808,
         "x": 22,
         "y": -112
