@@ -5,10 +5,10 @@ starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: bceb8372-36f8-473d-8bd5-d850d9e1da5b
+    taskid: 1c0bb526-4f44-4095-885d-de81a8bf51ca
     type: start
     task:
-      id: bceb8372-36f8-473d-8bd5-d850d9e1da5b
+      id: 1c0bb526-4f44-4095-885d-de81a8bf51ca
       version: -1
       name: ""
       iscommand: false
@@ -28,12 +28,14 @@ tasks:
     note: false
     timertriggers: []
     ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
   "1":
     id: "1"
-    taskid: 8735f586-8871-4f39-8ff5-a1d766fa8b6c
+    taskid: 6b263c77-b8d5-4ef4-8e15-5ad8b5e273f9
     type: regular
     task:
-      id: 8735f586-8871-4f39-8ff5-a1d766fa8b6c
+      id: 6b263c77-b8d5-4ef4-8e15-5ad8b5e273f9
       version: -1
       name: nmap-scan
       description: Scan targets with the given parameters
@@ -60,12 +62,14 @@ tasks:
     note: false
     timertriggers: []
     ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
   "2":
     id: "2"
-    taskid: 863dd4f6-35d6-4ef6-8986-86520b0ddc2e
+    taskid: ca6856eb-daaf-44ef-84be-f695c7f65a72
     type: condition
     task:
-      id: 863dd4f6-35d6-4ef6-8986-86520b0ddc2e
+      id: ca6856eb-daaf-44ef-84be-f695c7f65a72
       version: -1
       name: Exists
       description: Check if a given value exists in the context. Will return 'no'
@@ -77,8 +81,6 @@ tasks:
     nexttasks:
       "no":
       - "4"
-      "yes":
-      - "3"
     scriptarguments:
       value:
         simple: ${NMAP.Scan.Hosts.Services.Port(val==22)}
@@ -93,40 +95,14 @@ tasks:
     note: false
     timertriggers: []
     ignoreworker: false
-  "3":
-    id: "3"
-    taskid: 535a46d7-43ac-44c3-8f7d-23e137e4c453
-    type: regular
-    task:
-      id: 535a46d7-43ac-44c3-8f7d-23e137e4c453
-      version: -1
-      name: Close investigation
-      scriptName: CloseInvestigation
-      type: regular
-      iscommand: false
-      brand: ""
-    scriptarguments:
-      notes:
-        simple: Found the service
-      reason:
-        simple: All good
-    separatecontext: false
-    view: |-
-      {
-        "position": {
-          "x": 170,
-          "y": 765
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
   "4":
     id: "4"
-    taskid: 18e87031-813b-48e3-8add-5025d348fae0
+    taskid: b2541e86-0e15-4931-8755-54938aac2a29
     type: regular
     task:
-      id: 18e87031-813b-48e3-8add-5025d348fae0
+      id: b2541e86-0e15-4931-8755-54938aac2a29
       version: -1
       name: Oops, problem
       scriptName: Print
@@ -147,12 +123,14 @@ tasks:
     note: false
     timertriggers: []
     ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
   "5":
     id: "5"
-    taskid: 45144983-0008-465e-8f48-6764e4f6d0c0
+    taskid: e66ba8b6-27d4-46b6-8be3-02ee553cb086
     type: regular
     task:
-      id: 45144983-0008-465e-8f48-6764e4f6d0c0
+      id: e66ba8b6-27d4-46b6-8be3-02ee553cb086
       version: -1
       name: nmap-scan
       description: Scan targets with the given parameters
@@ -179,12 +157,14 @@ tasks:
     note: false
     timertriggers: []
     ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
   "6":
     id: "6"
-    taskid: 2a5d4701-319b-446c-8282-a5df519f46a4
+    taskid: e1ef6f98-d9e7-43b0-8eb1-81c442286420
     type: condition
     task:
-      id: 2a5d4701-319b-446c-8282-a5df519f46a4
+      id: e1ef6f98-d9e7-43b0-8eb1-81c442286420
       version: -1
       name: check Hostname
       description: Check whether the values provided in arguments are equal. If either
@@ -195,8 +175,6 @@ tasks:
     nexttasks:
       '#default#':
       - "4"
-      "yes":
-      - "3"
     separatecontext: false
     conditions:
     - label: "yes"
@@ -230,17 +208,18 @@ tasks:
     note: false
     timertriggers: []
     ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
 view: |-
   {
     "linkLabelsPosition": {
-      "2_4_no": 0.26,
-      "6_3_yes": 0.63
+      "2_4_no": 0.26
     },
     "paper": {
       "dimensions": {
-        "height": 810,
-        "width": 1180,
-        "x": 170,
+        "height": 705,
+        "width": 1085,
+        "x": 265,
         "y": 50
       }
     }

@@ -5,10 +5,10 @@ starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: e4c6f828-048f-4629-8c4b-f04edfc4f785
+    taskid: 605083fa-ff59-44be-86db-75a0e2e771ac
     type: start
     task:
-      id: e4c6f828-048f-4629-8c4b-f04edfc4f785
+      id: 605083fa-ff59-44be-86db-75a0e2e771ac
       version: -1
       name: ""
       iscommand: false
@@ -31,10 +31,10 @@ tasks:
     quietmode: 0
   "1":
     id: "1"
-    taskid: af6e64e2-1df9-4a26-8d9c-0d773f9dbe5e
+    taskid: f3cf0c28-9faf-4823-83b4-763071d7a1e8
     type: regular
     task:
-      id: af6e64e2-1df9-4a26-8d9c-0d773f9dbe5e
+      id: f3cf0c28-9faf-4823-83b4-763071d7a1e8
       version: -1
       name: Print Hello World
       description: Prints text to war room (Markdown supprted)
@@ -63,10 +63,10 @@ tasks:
     quietmode: 0
   "2":
     id: "2"
-    taskid: 9538b979-9c81-4419-8e2f-01e8be5e14a6
+    taskid: 5df3f96a-e9ed-4995-8a73-07ba9f61e488
     type: regular
     task:
-      id: 9538b979-9c81-4419-8e2f-01e8be5e14a6
+      id: 5df3f96a-e9ed-4995-8a73-07ba9f61e488
       version: -1
       name: Get list of manual commands
       scriptName: listExecutedCommands
@@ -94,10 +94,10 @@ tasks:
     quietmode: 0
   "3":
     id: "3"
-    taskid: 06f1cccc-7518-4159-8e8c-4179c652d957
+    taskid: 827688c9-7ea0-44b5-8f1c-8478001c0c5a
     type: regular
     task:
-      id: 06f1cccc-7518-4159-8e8c-4179c652d957
+      id: 827688c9-7ea0-44b5-8f1c-8478001c0c5a
       version: -1
       name: Save response to context
       description: "Takes the comments of a given entry ID and stores them in the
@@ -132,10 +132,10 @@ tasks:
     quietmode: 0
   "4":
     id: "4"
-    taskid: e5a2c1b3-2aea-4abd-8b90-a53bceb2dcfd
+    taskid: c3d77843-815d-49aa-83f3-2a074101bab6
     type: condition
     task:
-      id: e5a2c1b3-2aea-4abd-8b90-a53bceb2dcfd
+      id: c3d77843-815d-49aa-83f3-2a074101bab6
       version: -1
       name: Check that we didn't get any commands
       scriptName: AreValuesEqual
@@ -167,10 +167,10 @@ tasks:
     quietmode: 0
   "5":
     id: "5"
-    taskid: 1aee5441-00ba-43f2-8fb4-9e7f5f1a4024
+    taskid: 4bbb6116-826d-4fbd-8c14-ce86ddffea0f
     type: regular
     task:
-      id: 1aee5441-00ba-43f2-8fb4-9e7f5f1a4024
+      id: 4bbb6116-826d-4fbd-8c14-ce86ddffea0f
       version: -1
       name: Get playbook commands
       scriptName: listExecutedCommands
@@ -198,10 +198,10 @@ tasks:
     quietmode: 0
   "6":
     id: "6"
-    taskid: eff80cc0-b7d3-4ee2-802d-aaefbcd42162
+    taskid: 3611a982-0483-40c8-8274-418ce11abd9b
     type: regular
     task:
-      id: eff80cc0-b7d3-4ee2-802d-aaefbcd42162
+      id: 3611a982-0483-40c8-8274-418ce11abd9b
       version: -1
       name: Save response to context
       scriptName: commentsToContext
@@ -232,19 +232,16 @@ tasks:
     quietmode: 0
   "7":
     id: "7"
-    taskid: 375275ba-f25e-44ae-8f51-c2e46c4e2ecb
+    taskid: a00d600f-395a-4879-87b1-86bc87e27373
     type: condition
     task:
-      id: 375275ba-f25e-44ae-8f51-c2e46c4e2ecb
+      id: a00d600f-395a-4879-87b1-86bc87e27373
       version: -1
       name: Check that we got commands
       scriptName: AreValuesEqual
       type: condition
       iscommand: false
       brand: ""
-    nexttasks:
-      "no":
-      - "8"
     scriptarguments:
       left:
         simple: ${withData=val.trim()}
@@ -265,40 +262,12 @@ tasks:
     ignoreworker: false
     skipunavailable: false
     quietmode: 0
-  "8":
-    id: "8"
-    taskid: 24a124e4-346d-44ff-80c7-ff9a14d91d47
-    type: regular
-    task:
-      id: 24a124e4-346d-44ff-80c7-ff9a14d91d47
-      version: -1
-      name: Close
-      scriptName: CloseInvestigation
-      type: regular
-      iscommand: false
-      brand: ""
-    scriptarguments:
-      notes: {}
-      reason: {}
-    separatecontext: false
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": 1420
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1465,
+        "height": 1290,
         "width": 380,
         "x": 50,
         "y": 50
