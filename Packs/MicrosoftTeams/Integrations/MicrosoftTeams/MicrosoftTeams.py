@@ -19,7 +19,7 @@ from traceback import format_exc
 # Disable insecure warnings
 requests.packages.urllib3.disable_warnings()
 
-''' GLOBAL VARIABLES'''
+''' GLOBAL VARIABLES'''''
 PARAMS: dict = demisto.params()
 BOT_ID: str = PARAMS.get('bot_id', '')
 BOT_PASSWORD: str = PARAMS.get('bot_password', '')
