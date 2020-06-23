@@ -28,9 +28,9 @@ def get_faild_steps_list():
             if action_status and action_status == 'failed':
                 action_name = action.get('name', '')
                 if action_name != step_name:
-                    failed_steps_list.append(f'* {step_name}: {action_name}')
+                    failed_steps_list.append(f'{step_name}: {action_name}')
                 else:
-                    failed_steps_list.append(f'* {step_name}')
+                    failed_steps_list.append(f'{step_name}')
 
     return failed_steps_list
 
