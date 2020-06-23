@@ -137,7 +137,7 @@ jobs:
                       echo $pylint_utils_result
                       exit 1
                   fi
-               exit 0
+                  exit 0
             fi
       - run:
           name: Validate Files and Yaml
