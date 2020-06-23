@@ -65,53 +65,53 @@ jobs:
           fingerprints:
             - "02:df:a5:6a:53:9a:f5:5d:bd:a6:fc:b2:db:9b:c9:47" # disable-secrets-detection
             - "f5:25:6a:e5:ac:4b:84:fb:60:54:14:82:f1:e9:6c:f9" # disable-secrets-detection
-      - run:
-          name: Check if CircleCI's config file is up to date
-          when: always
-          command: |
-            if [[ $CIRCLE_BRANCH =~ pull/[0-9]+ ]]; then
-              echo "Skipping, Should not run on contributor's branch."
-              exit 0
-            fi
-            if [ $CIRCLE_NODE_INDEX -ne 0 ] ;
-              then
-                echo 'Skipping - running only in container number 0.'
-                exit 0;
-            fi
-            # Checks if there's any diff from master
-            if [[ `git diff origin/master -- .circleci/config.yml` ]]; then
-                # Checks if part of the branch's changes
-                if [[ -z `git diff origin/master..."$CIRCLE_BRANCH" --name-only | grep .circleci/config.yml` ]]; then
-                    echo ".circleci/config.yml has been changed. Merge from master"
-                    exit 1
-                else
-                    echo ".circleci/config.yml is part of the branch changes, proceeding"
-                    exit 0
-                fi
-            else
-                echo ".circleci/config.yml is up to date!"
-            fi
-      - run:
-          name: Update Tests step
-          when: always
-          command: |
-            if [ $CIRCLE_NODE_INDEX -ne 0 ] ;
-              then
-                echo "Skipping - running only in container number 0"
-                exit 0
-            fi
-            python3 ./Tests/scripts/update_conf_json.py
-            cp "./Tests/conf.json" "$CIRCLE_ARTIFACTS/conf.json"
-      - run:
-          name: Create ID Set
-          when: always
-          command: |
-            if [ $CIRCLE_NODE_INDEX -ne 0 ] ;
-              then
-                echo "Skipping - running only in container number 0"
-                exit 0
-            fi
-            demisto-sdk create-id-set -o ./Tests/id_set.json
+#      - run:
+#          name: Check if CircleCI's config file is up to date
+#          when: always
+#          command: |
+#            if [[ $CIRCLE_BRANCH =~ pull/[0-9]+ ]]; then
+#              echo "Skipping, Should not run on contributor's branch."
+#              exit 0
+#            fi
+#            if [ $CIRCLE_NODE_INDEX -ne 0 ] ;
+#              then
+#                echo 'Skipping - running only in container number 0.'
+#                exit 0;
+#            fi
+#            # Checks if there's any diff from master
+#            if [[ `git diff origin/master -- .circleci/config.yml` ]]; then
+#                # Checks if part of the branch's changes
+#                if [[ -z `git diff origin/master..."$CIRCLE_BRANCH" --name-only | grep .circleci/config.yml` ]]; then
+#                    echo ".circleci/config.yml has been changed. Merge from master"
+#                    exit 1
+#                else
+#                    echo ".circleci/config.yml is part of the branch changes, proceeding"
+#                    exit 0
+#                fi
+#            else
+#                echo ".circleci/config.yml is up to date!"
+#            fi
+#      - run:
+#          name: Update Tests step
+#          when: always
+#          command: |
+#            if [ $CIRCLE_NODE_INDEX -ne 0 ] ;
+#              then
+#                echo "Skipping - running only in container number 0"
+#                exit 0
+#            fi
+#            python3 ./Tests/scripts/update_conf_json.py
+#            cp "./Tests/conf.json" "$CIRCLE_ARTIFACTS/conf.json"
+#      - run:
+#          name: Create ID Set
+#          when: always
+#          command: |
+#            if [ $CIRCLE_NODE_INDEX -ne 0 ] ;
+#              then
+#                echo "Skipping - running only in container number 0"
+#                exit 0
+#            fi
+#            demisto-sdk create-id-set -o ./Tests/id_set.json
       - run:
           name: Infrastructure testing
           when: always
@@ -128,9 +128,14 @@ jobs:
             python3 -m pytest ./Tests/Marketplace/Tests/search_and_install_packs_test.py -v
 
             if [ -n "${DEMISTO_SDK_NIGHTLY}" ] ; then
-                  python3 -m pylint --errors-only ./Tests
-                  python3 -m pylint --errors-only ./Utils
+                  pylint_test_result=$(python3 -m pylint --errors-only ./Tests | grep demisto_sdk)
+                  pylint_utils_result=$(python3 -m pylint --errors-only ./Utils | grep demisto_sdk)
 
+                  if [ -n $pylint_test_result ] || [ -n $pylint_utils_result ] ; then
+                      echo $pylint_test_result
+                      echo $pylint_utils_result
+                      exit 1
+                  fi
             fi
       - run:
           name: Validate Files and Yaml
