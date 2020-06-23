@@ -555,22 +555,22 @@ jobs:
 #          path: artifacts
 #          destination: artifacts
 #          when: always
-#      - run:
-#          name: Slack Notifier
-#          shell: /bin/bash
-#          command: |
-#            if [[ $CIRCLE_BRANCH =~ pull/[0-9]+ ]]; then
-#              echo "Skipping instance tests for forked PRs"
-#              exit 0
-#            fi
-#            if [ -n "${INSTANCE_TESTS}" ] ;
-#              then
-#                echo "Skipping - not running in INSTANCE_TESTS build"
-#                exit 0
-#            fi
-#            ./Tests/scripts/slack_notifier.sh $CIRCLE_NODE_INDEX ./env_results.json
-#
-#          when: always
+      - run:
+          name: Slack Notifier
+          shell: /bin/bash
+          command: |
+            if [[ $CIRCLE_BRANCH =~ pull/[0-9]+ ]]; then
+              echo "Skipping instance tests for forked PRs"
+              exit 0
+            fi
+            if [ -n "${INSTANCE_TESTS}" ] ;
+              then
+                echo "Skipping - not running in INSTANCE_TESTS build"
+                exit 0
+            fi
+            ./Tests/scripts/slack_notifier.sh $CIRCLE_NODE_INDEX ./env_results.json
+
+          when: always
       - run:
           name: Instance Test
           command: |
