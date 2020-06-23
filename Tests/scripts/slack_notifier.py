@@ -227,34 +227,34 @@ def slack_notifier(build_url, slack_token, container, build_type, env_results_fi
     branch_name_reg = re.search(r'\* (.*)', branches)
     branch_name = branch_name_reg.group(1)
 
-    if branch_name == 'master':
-        print("Extracting build status")
-        # container 1: unit tests
-        if int(container):
-            print_color(f'Starting Slack notifications about {build_type} build - unit tests', LOG_COLORS.GREEN)
-            if is_sdk_nightly:
-                content_team_attachments = get_attachments_for_unit_test(build_url, is_sdk_build=is_sdk_nightly)
-            else:
-                content_team_attachments = get_attachments_for_unit_test(build_url)
-
-        # container 0: test playbooks
+    # if branch_name == 'master':
+    print("Extracting build status")
+    # container 1: unit tests
+    if int(container):
+        print_color(f'Starting Slack notifications about {build_type} build - unit tests', LOG_COLORS.GREEN)
+        if is_sdk_nightly:
+            content_team_attachments = get_attachments_for_unit_test(build_url, is_sdk_build=is_sdk_nightly)
         else:
-            if is_sdk_nightly:
-                print_color(f'Starting Slack notifications about {build_type} build - all steps', LOG_COLORS.GREEN)
-                content_team_attachments = get_attachments_for_all_steps(build_url)
-            else:
-                print_color(f'Starting Slack notifications about {build_type} build - test playbook', LOG_COLORS.GREEN)
-                content_team_attachments, _ = get_attachments_for_test_playbooks(build_url, env_results_file_name)
+            content_team_attachments = get_attachments_for_unit_test(build_url)
 
-        print("Sending Slack messages to #content-team")
-        slack_client = SlackClient(slack_token)
-        slack_client.api_call(
-            "chat.postMessage",
-            channel="dmst-content-team",
-            username="Content CircleCI",
-            as_user="False",
-            attachments=content_team_attachments
-        )
+    # container 0: test playbooks
+    else:
+        if is_sdk_nightly:
+            print_color(f'Starting Slack notifications about {build_type} build - all steps', LOG_COLORS.GREEN)
+            content_team_attachments = get_attachments_for_all_steps(build_url)
+        else:
+            print_color(f'Starting Slack notifications about {build_type} build - test playbook', LOG_COLORS.GREEN)
+            content_team_attachments, _ = get_attachments_for_test_playbooks(build_url, env_results_file_name)
+
+    print("Sending Slack messages to #content-team")
+    slack_client = SlackClient(slack_token)
+    slack_client.api_call(
+        "chat.postMessage",
+        channel="dmst-reut",
+        username="Content CircleCI",
+        as_user="False",
+        attachments=content_team_attachments
+    )
 
 
 def main():
