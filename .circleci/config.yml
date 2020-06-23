@@ -128,6 +128,7 @@ jobs:
             python3 -m pytest ./Tests/Marketplace/Tests/search_and_install_packs_test.py -v
 
             if [ -n "${DEMISTO_SDK_NIGHTLY}" ] ; then
+#                  check for sdk related pylint errors
                   pylint_test_result=$(python3 -m pylint --errors-only ./Tests | grep demisto_sdk)
                   pylint_utils_result=$(python3 -m pylint --errors-only ./Utils | grep demisto_sdk)
 
@@ -136,6 +137,7 @@ jobs:
                       echo $pylint_utils_result
                       exit 1
                   fi
+               exit 0
             fi
       - run:
           name: Validate Files and Yaml
