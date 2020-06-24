@@ -137,7 +137,6 @@ jobs:
                       echo Pylint exit code on Utils directory:$pylint_utils_result
                       exit 1
                   fi
-#                  exit 0
             fi
       - run:
           name: Validate Files and Yaml
