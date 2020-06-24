@@ -136,13 +136,6 @@ jobs:
 
                   pylint_test_result_final="$(echo $pylint_test_result | grep demisto_sdk || true)"
                   echo $pylint_test_result_final
-
-
-                  if [ -n $pylint_test_result ] || [ -n $pylint_utils_result ] ; then
-                      echo Pylint exit code on Test directory: $pylint_test_result
-                      echo Pylint exit code on Utils directory:$pylint_utils_result
-                      exit 1
-                  fi
             fi
             exit 0
       - run:
