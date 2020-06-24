@@ -10,7 +10,7 @@ from typing import Dict, Tuple
 
 from distutils.version import LooseVersion
 import requests
-from demisto_sdk.commands.common.tools import run_cosdfmmand, print_error, print_warning, get_dict_from_file
+from demisto_sdk.commands.common.tools import run_command, print_error, print_warning, get_dict_from_file
 
 
 PACKS_DIR = 'Packs'
