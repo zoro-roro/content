@@ -1,0 +1,13 @@
+#!/bin/bash
+
+pylint_tests_result="$(python3 -m pylint --errors-only ./Tests | grep demisto_sdk)"
+pylint_utils_result="$(python3 -m pylint --errors-only ./Utils | grep demisto_sdk)"
+
+
+echo Pylint exit code on Test directory: $pylint_test_result
+
+if [ -n "$pylint_test_result" ] || [ -n "$pylint_utils_result" ]; then
+    echo Pylint result on Test directory: $pylint_test_result
+    echo Pylint result on Utils directory: $pylint_utils_result
+    exit 1
+fi
