@@ -28,8 +28,10 @@ if not demisto.params()['proxy']:
 ''' GLOBAL VARS '''
 SERVER = demisto.params()['server'][:-1] if demisto.params()['server'].endswith('/') else demisto.params()['server']
 ORG_NAME = demisto.params()['org']
-USERNAME = demisto.params()['credentials']['identifier']
-PASSWORD = demisto.params()['credentials']['password']
+USERNAME = demisto.params().get('credentials', {}).get('identifier')
+PASSWORD = demisto.params().get('credentials', {}).get('password')
+API_KEY_ID = demisto.params().get('api_key_id')
+API_KEY_SECRET = demisto.params().get('api_key_secret')
 USE_SSL = not demisto.params().get('insecure', False)
 FETCH_TIME = demisto.params().get('fetch_time', '')
 TIME_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
@@ -994,13 +996,32 @@ def test():
 
 
 ''' EXECUTION CODE '''
-client = resilient.get_client({
-    'email': USERNAME,
-    'password': PASSWORD,
-    'host': SERVER,
-    'cafile': 'true' if USE_SSL else 'false',
-    'org': ORG_NAME
-})
+
+
+def get_client():
+    if USERNAME and PASSWORD:
+        resilient_client = resilient.get_client({
+            'email': USERNAME,
+            'password': PASSWORD,
+            'host': SERVER,
+            'cafile': 'true' if USE_SSL else 'false',
+            'org': ORG_NAME
+        })
+    elif API_KEY_ID and API_KEY_SECRET:
+        resilient_client = resilient.get_client({
+            'host': SERVER,
+            'cafile': 'true' if USE_SSL else 'false',
+            'org': ORG_NAME,
+            'api_key_id': API_KEY_ID,
+            'api_key_secret': API_KEY_SECRET
+        })
+    else:
+        return_error('Credentials were not provided, please configure the username and password'
+                     ' or the api_key_id and api_secret_id')
+    return resilient_client
+
+
+client = get_client()
 
 # Disable SDK logging warning messages
 integration_logger = logging.getLogger('resilient')  # type: logging.Logger
