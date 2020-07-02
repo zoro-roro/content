@@ -999,25 +999,25 @@ def test():
 
 
 def get_client():
-    if USERNAME and PASSWORD:
-        resilient_client = resilient.get_client({
-            'email': USERNAME,
-            'password': PASSWORD,
+    opts_dict = {
             'host': SERVER,
             'cafile': 'true' if USE_SSL else 'false',
             'org': ORG_NAME
+        }
+    if USERNAME and PASSWORD:
+        opts_dict.update({
+            'email': USERNAME,
+            'password': PASSWORD
         })
     elif API_KEY_ID and API_KEY_SECRET:
-        resilient_client = resilient.get_client({
-            'host': SERVER,
-            'cafile': 'true' if USE_SSL else 'false',
-            'org': ORG_NAME,
+        opts_dict.update({
             'api_key_id': API_KEY_ID,
             'api_key_secret': API_KEY_SECRET
         })
     else:
-        return_error('Credentials were not provided, please configure the username and password'
-                     ' or the api_key_id and api_secret_id')
+        return_error('Credentials were not provided. Configure either the username and password'
+                     ' or the API Key and API Secret')
+    resilient_client = resilient.get_client(opts=opts_dict)
     return resilient_client
 
 
