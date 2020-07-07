@@ -1000,10 +1000,10 @@ def test():
 
 def get_client():
     opts_dict = {
-            'host': SERVER,
-            'cafile': 'true' if USE_SSL else 'false',
-            'org': ORG_NAME
-        }
+        'host': SERVER,
+        'cafile': 'true' if USE_SSL else 'false',
+        'org': ORG_NAME
+    }
     if USERNAME and PASSWORD:
         opts_dict.update({
             'email': USERNAME,
