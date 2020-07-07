@@ -594,7 +594,7 @@ script:
     - contextPath: Resilient.Incidents.Tasks.Status
       description: Task status (Open/Closed)
       type: string
-  dockerimage: demisto/resilient:1.0.0.8854
+  dockerimage: demisto/resilient:1.0.0.9718
   feed: false
   isfetch: true
   longRunning: false
