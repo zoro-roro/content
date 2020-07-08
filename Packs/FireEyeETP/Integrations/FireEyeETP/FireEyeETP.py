@@ -1,11 +1,4 @@
-import demistomock as demisto
 from CommonServerPython import *
-from CommonServerUserPython import *
-
-'''
-IMPORTS
-'''
-
 from datetime import timedelta, datetime
 import requests
 import os
@@ -15,10 +8,6 @@ import json
 
 # disable insecure warnings
 requests.packages.urllib3.disable_warnings()
-
-'''
-GLOBAL VARS
-'''
 
 API_KEY = demisto.params().get('api_key')
 BASE_PATH = '{}/api/v1'.format(demisto.params().get('server'))
@@ -38,11 +27,6 @@ REJECTION_REASONS = ['ETP102', 'ETP103', 'ETP104', 'ETP200', 'ETP201', 'ETP203',
 STATUS_VALUES = ["accepted", "deleted", "delivered", "delivered (retroactive)", "dropped",
                  "dropped oob", "dropped (oob retroactive)", "permanent failure", "processing",
                  "quarantined", "rejected", "temporary failure"]
-
-'''
-BASIC FUNCTIONS
-'''
-
 
 def set_proxies():
     if not demisto.params().get('proxy', False):
@@ -89,16 +73,7 @@ def http_request(method, url, body=None, headers={}, url_params=None):
     return response.json()
 
 
-def return_error_entry(message):
-    entry = {
-        'Type': entryTypes['error'],
-        'Contents': str(message),
-        'ContentsFormat': formats['text'],
-    }
-    demisto.results(entry)
-
-
-def to_search_attribute_object(value, filter=None, is_list=False, valid_values=None):
+def to_search_attribute_object(value, _filter=None, is_list=False, valid_values=None):
     values = listify(value) if is_list else value
     if valid_values:
         for val in values:
@@ -109,8 +84,8 @@ def to_search_attribute_object(value, filter=None, is_list=False, valid_values=N
         'value': values,
         'includes': ['SMTP', 'HEADER']
     }
-    if filter:
-        attribute['filter'] = filter
+    if _filter:
+        attribute['filter'] = _filter
 
     return attribute
 
@@ -125,35 +100,35 @@ def format_search_attributes(from_email=None, from_email_not_in=None, recipients
     if from_email and from_email_not_in:
         raise ValueError('Only one of the followings can be specified: from_email, from_email_not_in')
     if from_email:
-        search_attributes['fromEmail'] = to_search_attribute_object(from_email, filter='in', is_list=True)
+        search_attributes['fromEmail'] = to_search_attribute_object(from_email, _filter='in', is_list=True)
     elif from_email_not_in:
-        search_attributes['fromEmail'] = to_search_attribute_object(from_email_not_in, filter='not in', is_list=True)
+        search_attributes['fromEmail'] = to_search_attribute_object(from_email_not_in, _filter='not in', is_list=True)
 
     # handle recipients attributes
     if recipients and recipients_not_in:
         raise ValueError('Only one of the followings can be specified: recipients, recipients_not_in')
     if recipients:
-        search_attributes['recipients'] = to_search_attribute_object(recipients, filter='in', is_list=True)
+        search_attributes['recipients'] = to_search_attribute_object(recipients, _filter='in', is_list=True)
     elif recipients_not_in:
-        search_attributes['recipients'] = to_search_attribute_object(recipients_not_in, filter='not in', is_list=True)
+        search_attributes['recipients'] = to_search_attribute_object(recipients_not_in, _filter='not in', is_list=True)
 
     # handle status attributes
     if status and status_not_in:
         raise ValueError('Only one of the followings can be specified: status, status_not_in')
     if status:
-        search_attributes['status'] = to_search_attribute_object(status, filter='in', is_list=True,
+        search_attributes['status'] = to_search_attribute_object(status, _filter='in', is_list=True,
                                                                  valid_values=STATUS_VALUES)
     elif status_not_in:
-        search_attributes['status'] = to_search_attribute_object(status, filter='in', is_list=True,
+        search_attributes['status'] = to_search_attribute_object(status, _filter='in', is_list=True,
                                                                  valid_values=STATUS_VALUES)
 
     if subject:
-        search_attributes['subject'] = to_search_attribute_object(subject, filter='in', is_list=True)
+        search_attributes['subject'] = to_search_attribute_object(subject, _filter='in', is_list=True)
     if rejection_reason:
         search_attributes['rejectionReason'] = to_search_attribute_object(rejection_reason, is_list=True,
                                                                           valid_values=REJECTION_REASONS)
     if sender_ip:
-        search_attributes['senderIP'] = to_search_attribute_object(sender_ip, filter='in', is_list=True)
+        search_attributes['senderIP'] = to_search_attribute_object(sender_ip, _filter='in', is_list=True)
     if domains:
         search_attributes['domains'] = to_search_attribute_object(domains, is_list=True)
     if from_accepted_date_time and to_accepted_date_time:
@@ -378,6 +353,8 @@ def alert_readable_data(alert):
 
 
 def malware_readable_data(malware):
+    if not isinstance(malware, dict):
+        return {}
     return {
         'Name': malware.get('name'),
         'Domain': malware.get('domain'),
@@ -399,7 +376,7 @@ def alert_context_data(alert):
 def get_alerts_request(legacy_id=None, from_last_modified_on=None, etp_message_id=None, size=None, raw_response=False):
     url = '{}/alerts'.format(BASE_PATH)
 
-    # constract the body for the request
+    # construct the body for the request
     body = {}
     attributes = {}
     if legacy_id:
@@ -534,7 +511,6 @@ def get_alert_command():
 
 
 def parse_string_in_iso_format_to_datetime(iso_format_string):
-    alert_last_modified = None
     try:
         alert_last_modified = datetime.strptime(iso_format_string, "%Y-%m-%dT%H:%M:%S.%f")
     except ValueError:
@@ -565,6 +541,7 @@ def fetch_incidents():
     if 'last_created' not in last_run.keys():
         last_run['last_created'] = week_ago.strftime(iso_format)
 
+    demisto.info('Fetching FireEye ETP incidents. with the last_run: {}'.format(str(last_run)))
     alerts_raw_response = get_alerts_request(
         from_last_modified_on=last_run['last_modified'],
         size=100,
@@ -572,38 +549,31 @@ def fetch_incidents():
     )
     # end if no results returned
     if not alerts_raw_response or not alerts_raw_response.get('data'):
-        demisto.incidents([])
-        return
+        return last_run, []
+    else:
+        alerts = alerts_raw_response.get('data', [])
+        last_alert_created = parse_string_in_iso_format_to_datetime(last_run['last_created'])
+        alert_creation_limit = parse_string_in_iso_format_to_datetime(last_run['last_created'])
+        incidents = []
 
-    alerts = alerts_raw_response.get('data', [])
-    last_alert_created = parse_string_in_iso_format_to_datetime(last_run['last_created'])
-    alert_creation_limit = parse_string_in_iso_format_to_datetime(last_run['last_created'])
-    incidents = []
+        for alert in alerts:
+            # filter by message status if specified
+            if MESSAGE_STATUS and alert['attributes']['email']['status'] != MESSAGE_STATUS:
+                continue
+            # filter alerts created before 'last_created'
+            current_alert_created = parse_string_in_iso_format_to_datetime(alert['attributes']['alert']['timestamp'])
+            if current_alert_created < alert_creation_limit:
+                continue
+            # append alert to incident
+            incidents.append(parse_alert_to_incident(alert))
+            # set last created
+            if current_alert_created > last_alert_created:
+                last_alert_created = current_alert_created
 
-    for alert in alerts:
-        # filter by message status if specified
-        if MESSAGE_STATUS and alert['attributes']['email']['status'] != MESSAGE_STATUS:
-            continue
-        # filter alerts created before 'last_created'
-        current_alert_created = parse_string_in_iso_format_to_datetime(alert['attributes']['alert']['timestamp'])
-        if current_alert_created < alert_creation_limit:
-            continue
-        # append alert to incident
-        incidents.append(parse_alert_to_incident(alert))
-        # set last created
-        if current_alert_created > last_alert_created:
-            last_alert_created = current_alert_created
+        last_run['last_modified'] = alerts_raw_response['meta']['fromLastModifiedOn']['end']
+        last_run['last_created'] = last_alert_created.strftime(iso_format)
 
-    last_run['last_modified'] = alerts_raw_response['meta']['fromLastModifiedOn']['end']
-    last_run['last_created'] = last_alert_created.strftime(iso_format)
-
-    demisto.incidents(incidents)
-    demisto.setLastRun(last_run)
-
-
-'''
-EXECUTION
-'''
+        return last_run, incidents
 
 
 def main():
@@ -612,10 +582,11 @@ def main():
     try:
         if demisto.command() == 'test-module':
             get_alerts_request(size=1)
-            # request was succesful
             demisto.results('ok')
         if demisto.command() == 'fetch-incidents':
-            fetch_incidents()
+            last_run, incidents = fetch_incidents()
+            demisto.setLastRun(last_run)
+            demisto.incidents(incidents)
         if demisto.command() == 'fireeye-etp-search-messages':
             search_messages_command()
         if demisto.command() == 'fireeye-etp-get-message':
@@ -627,7 +598,7 @@ def main():
     except ValueError as e:
         LOG(e)
         LOG.print_log()
-        return_error_entry(e)
+        return_error(e)
 
 
 if __name__ in ('__main__', '__builtin__', 'builtins'):
