@@ -1045,7 +1045,9 @@ def is_any_test_runnable(test_ids, conf, id_set=None, server_version='0'):
                 id_set = json.load(conf_file)
         for test_id in test_ids:
             if is_test_runnable(test_id, id_set, conf, server_version):
+                print(f'~~~test id {test_id} is runnable in server version {server_version}')
                 return True
+    print(f'~~~no tests are runable for server version {server_version}')
     return False
 
 
@@ -1190,10 +1192,8 @@ def create_filter_envs_file(tests, two_before_ga, one_before_ga, ga, conf, id_se
     envs_to_test = {
         'Demisto PreGA': True,
         'Demisto Marketplace': True,
-        'Demisto two before GA': is_any_test_runnable(test_ids=tests, server_version=two_before_ga, conf=conf,
-                                                      id_set=id_set),
-        'Demisto one before GA': is_any_test_runnable(test_ids=tests, server_version=one_before_ga, conf=conf,
-                                                      id_set=id_set),
+        'Demisto two before GA': True,
+        'Demisto one before GA': True,
         'Demisto GA': is_any_test_runnable(test_ids=tests, server_version=ga, conf=conf, id_set=id_set),
     }
     print("Creating filter_envs.json with the following envs: {}".format(envs_to_test))
@@ -1233,9 +1233,7 @@ def create_test_file(is_nightly, skip_save=False):
         conf = load_tests_conf()
         with open("./Tests/id_set.json", 'r') as conf_file:
             id_set = json.load(conf_file)
-        tests, packs_to_install = get_test_list_and_content_packs_to_install(
-            files_string, branch_name, two_before_ga, conf, id_set
-        )
+        tests, packs_to_install = {'Cortex Data Lake Test'}, {'CortexDataLake'}
         create_filter_envs_file(tests, two_before_ga, one_before_ga, ga, conf, id_set)
 
         tests_string = '\n'.join(tests)

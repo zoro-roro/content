@@ -698,7 +698,7 @@ script:
       description: Severity associated with the event.
       type: String
     - contextPath: CDL.Logging.Threat.LogTime
-      description: Time the log was received in Cortex Data Lake.
+      description: Time the log was received in Cortex Data Lake  .
       type: String
     - contextPath: CDL.Logging.Threat.LogSourceID
       description: ID that uniquely identifies the source of the log. If the source
