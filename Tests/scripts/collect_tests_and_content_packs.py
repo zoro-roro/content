@@ -1045,7 +1045,9 @@ def is_any_test_runnable(test_ids, conf, id_set=None, server_version='0'):
                 id_set = json.load(conf_file)
         for test_id in test_ids:
             if is_test_runnable(test_id, id_set, conf, server_version):
+                print(f'~~~test id {test_id} is runnable in server version {server_version}')
                 return True
+    print(f'~~~no tests are runable for server version {server_version}')
     return False
 
 
