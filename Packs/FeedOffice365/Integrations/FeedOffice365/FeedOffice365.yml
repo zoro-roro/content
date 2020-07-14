@@ -31,7 +31,7 @@ configuration:
   required: true
   type: 16
 - additionalinfo: Indicators from this integration instance will be marked with this
-    reputation
+    reputation test change
   defaultvalue: Good
   display: Indicator Reputation
   name: feedReputation
