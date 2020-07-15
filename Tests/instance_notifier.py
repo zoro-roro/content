@@ -61,7 +61,7 @@ def test_instances(secret_conf_path, server, username, password):
         product_description = integration.get('product_description', '')
         is_byoi = integration.get('byoi', True)
         has_integration = integration.get('has_integration', True)
-        validate_test = integration.get('validate_test', True)
+        validate_test = integration.get('validate_test', False)
 
         if has_integration:
             instance_id, failure_message, _ = __create_integration_instance(
